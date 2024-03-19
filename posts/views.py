@@ -14,9 +14,9 @@ class PostList(generics.ListCreateAPIView):
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
     filter_backends = [
-        filters.OrderingFilter
-        filters.SearchFilter
-        DjangoFilterBackend
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
     ]
     ordering_fields = [
         'likes_count',
