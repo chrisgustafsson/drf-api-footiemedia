@@ -107,12 +107,12 @@ MIDDLEWARE = [
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN'),
-        'https://3000-chrisgustafsson-footieme-35aoop9pgs.us1.codeanyapp.com/',
+        'https://3000-chrisgustafsson-footieme-35aoop9pgs.us1.codeanyapp.com',
     ]
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     extracted_url = re.match(
-        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', 'https://3000-chrisgustafsson-footieme-35aoop9pgs.us1.codeanyapp.com/'), re.IGNORECASE
+        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', 'https://3000-chrisgustafsson-footieme-35aoop9pgs.us1.codeanyapp.com'), re.IGNORECASE
     ).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
