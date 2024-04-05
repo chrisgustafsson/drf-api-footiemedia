@@ -111,7 +111,7 @@ MIDDLEWARE = [
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN'),
+        os.environ.get('CLIENT_ORIGIN', 'https://footiemedia-pp5-31598719feb2.herokuapp.com'),
     ]
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
