@@ -115,7 +115,8 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
         r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', '8000-chrisgustaf-drfapifooti-duzhsdvr1ao.ws-eu110.gitpod.io'), re.IGNORECASE
     ).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+        r"^https://.*\.gitpod\.io$",
+        r"^https://footiemedia\.herokuapp\.com",
     ]
 
 CORS_ALLOW_CREDENTIALS = True
