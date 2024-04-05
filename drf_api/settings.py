@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import re
+from corsheaders.defaults import default_headers, default_methods
 
 if os.path.exists('env.py'):
     import env
@@ -60,10 +61,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-chrisgustaf-drfapifooti-duzhsdvr1ao.ws-eu110.gitpod.io', 'footiemedia-e40f5ee4a039.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST')]
 
 
 # Application definition
+
+CORS_ALLOW_HEADERS = list(default_headers)
+CORS_ALLOW_METHODS = list(default_methods)
+CSRF_TRUSTED_ORIGINS = [os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN')]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -107,16 +112,12 @@ MIDDLEWARE = [
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN'),
-        'https://footiemedia-pp5-31598719feb2.herokuapp.com',
     ]
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(
-        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', '8000-chrisgustaf-drfapifooti-duzhsdvr1ao.ws-eu110.gitpod.io'), re.IGNORECASE
-    ).group(0)
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
-        r"^https://footiemedia\.herokuapp\.com",
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
 
 CORS_ALLOW_CREDENTIALS = True
