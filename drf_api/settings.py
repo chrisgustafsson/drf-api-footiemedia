@@ -72,7 +72,7 @@ CORS_ALLOW_METHODS = list(default_methods)
 CLIENT_ORIGIN_DEV = os.environ.get('CLIENT_ORIGIN_DEV')
 CLIENT_ORIGIN = os.environ.get('CLIENT_ORIGIN', 'https://footiemedia-pp5-31598719feb2.herokuapp.com')
 
-CSRF_TRUSTED_ORIGINS = [os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN')]
+CSRF_TRUSTED_ORIGINS = [CLIENT_ORIGIN_DEV, CLIENT_ORIGIN] if CLIENT_ORIGIN_DEV else [CLIENT_ORIGIN]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
